@@ -20,9 +20,17 @@ body {
 }
 
 @keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .glass-container {
@@ -35,6 +43,8 @@ body {
     padding: 3rem;
     max-width: 600px;
     text-align: center;
+    position: relative;
+    z-index: 1;
     transform: translateY(30px);
     opacity: 0;
     animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -53,6 +63,7 @@ h1 {
     margin-bottom: 1rem;
     background: linear-gradient(to right, #00f2fe, #4facfe);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     letter-spacing: -1px;
 }
@@ -65,19 +76,37 @@ p {
     color: rgba(255, 255, 255, 0.8);
 }
 
+.button-group {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
 .glow-button {
     padding: 1rem 2.5rem;
     font-size: 1.1rem;
     font-weight: 600;
     color: #ffffff;
-    background: linear-gradient(45deg, #00f2fe, #4facfe);
     border: none;
     border-radius: 50px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
     position: relative;
     overflow: hidden;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glow-button.primary {
+    background: linear-gradient(45deg, #00f2fe, #4facfe);
+    box-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
+    border: none;
+}
+
+.glow-button.secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
 }
 
 .glow-button::before {
@@ -87,15 +116,56 @@ p {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
     transition: all 0.4s ease;
 }
 
 .glow-button:hover {
     transform: translateY(-3px) scale(1.05);
+}
+
+.glow-button.primary:hover {
     box-shadow: 0 0 30px rgba(0, 242, 254, 0.6);
 }
 
 .glow-button:hover::before {
     left: 100%;
+}
+
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: 0;
+    animation: float 10s ease-in-out infinite;
+}
+
+.orb-1 {
+    width: 300px;
+    height: 300px;
+    background: rgba(0, 242, 254, 0.4);
+    top: 10%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.orb-2 {
+    width: 400px;
+    height: 400px;
+    background: rgba(79, 172, 254, 0.3);
+    bottom: 15%;
+    right: 15%;
+    animation-delay: -5s;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+    }
+
+    50% {
+        transform: translateY(-20px) scale(1.1);
+    }
 }
